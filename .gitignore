@@ -49,5 +49,5 @@ replay_pid*
 /src/main/resources/doc/
 
 # Qodana integration files
-qodana.sarif.json
-qodana.yaml
+# qodana.sarif.json
+# qodana.yaml

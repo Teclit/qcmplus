@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn -B package --file pom.xml  # Updated path to pom.xml
+        run: mvn -B package --file pom.xml
 
   build-frontend:
     needs: build-backend
@@ -32,9 +32,9 @@ jobs:
         with:
           node-version: '18'
       - name: Install dependencies
-        run: npm install --prefix qcmplusweb # make sure to specify the correct path to your frontend
+        run: npm install --prefix qcmplusweb 
       - name: Build
-        run: npm run build --prefix qcmplusweb # make sure to specify the correct path to your frontend
+        run: npm run build --prefix qcmplusweb
 
   qodana:
     needs: [build-backend, build-frontend]

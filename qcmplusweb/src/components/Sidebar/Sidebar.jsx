@@ -1,15 +1,14 @@
 import React from 'react';
 import './Sidebar.css';
 import ImgLogo from "../ImgLogo/ImgLogo";
-import {ListGroup,Row} from "react-bootstrap";
-import {getLoggedInUser, isAdminUser} from "../../services/AuthService";
-import UserLogged from "../UserLogged/UserLogged";
+import {ListGroup, Row} from "react-bootstrap";
+import {isAdminUser} from "../../services/AuthService";
 import Logout from "../LogOut/Logout";
 import AdminMenu from "../AdminMenu/AdminMenu";
+import UserMenu from "../UserMenu/UserMenu";
 
 const Sidebar = ({onItemClick, selectedItem}) => {
     const isAdmin = isAdminUser();
-    const getUser = getLoggedInUser();
 
     const renderAdminItem = (item, Icon, label) => {
         return isAdmin ? <ListGroup.Item
@@ -18,16 +17,29 @@ const Sidebar = ({onItemClick, selectedItem}) => {
         >
             <Icon className="sidebar-icon"/>
             <span>{label}</span>
-        </ListGroup.Item>: null;
+        </ListGroup.Item> : null;
+    };
+
+    const renderUserItem = (item, Icon, label) => {
+        return !isAdmin ? <ListGroup.Item
+            className={`sidebar-item ${selectedItem === item ? 'active' : ''}`}
+            onClick={() => onItemClick(item)}
+        >
+            <Icon className="sidebar-icon"/>
+            <span>{label}</span>
+        </ListGroup.Item> : null;
     };
 
     return (
         <>
-            <Row className={"mt-2 mb-5 text-center"}>
+            <Row className="mt-2 mb-5 text-center">
                 <ImgLogo link="/"/>
             </Row>
-            <UserLogged selectedItem={selectedItem} onItemClick={onItemClick} getUser={getUser}/>
-            <AdminMenu renderAdminItem={renderAdminItem}/>
+            {isAdmin ? (
+                <AdminMenu renderAdminItem={renderAdminItem}/>
+            ) : (
+                <UserMenu renderUserItem={renderUserItem}/>
+            )}
             <Logout/>
         </>
     );

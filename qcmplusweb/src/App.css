@@ -4,6 +4,7 @@
   --bg-default-color: #d4effa;
   --bg-default-light-color: #d4effa;
   --bg-default-dark-color: #509cda;
+  --bg-default-dark-hover-color: #2a78b8;
   --bg-default-blue-light-color: #def4ff;
   --bg-light-color: #fdfeff;
   --bg-warning-color: #fe5500;
@@ -25,6 +26,17 @@
 
 .small-font {
   font-size: 12px;
+}
+
+
+.defaultBtn{
+  background-color: var(--bg-default-dark-color);
+  color: var(--white-color);
+}
+.defaultBtn:hover{
+  background-color: var(--bg-dark-primary-color);
+  color: var(--white-color);
+  transition: background-color 0.3s ease;
 }
 
 

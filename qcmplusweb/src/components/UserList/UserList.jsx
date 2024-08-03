@@ -1,15 +1,14 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {Alert, Col, Container, Form, Pagination, Row, Table} from 'react-bootstrap';
-import PropTypes from "prop-types";
+import {Alert, Col, Form, Pagination, Row, Table} from 'react-bootstrap';
 import UserProfile from '../UserProfile/UserProfile';
 import UserForm from '../UserForm/UserForm';
 import UserRow from '../UserRow/UserRow';
 import './UserList.css';
 import DeleteConfirmation from "../Modals/DeleteConfirmation";
-import {removeUser, retrieveUser, retrieveUsers} from '../../services/UserService';
+import {removeUser, retrieveUsers} from '../../services/UserService';
 import {USERLISTMESSAGES} from "./UserListTexts";
 
-const UserList = ({ title, userRole }) => {
+const UserList = ({title, userRole}) => {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(12);
@@ -21,7 +20,7 @@ const UserList = ({ title, userRole }) => {
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const userRoleId = userRole.value
-    const userRoleName =userRole.roleName
+    const userRoleName = userRole.roleName
 
     const handleMessage = (setMessage, message, timeout = 3000) => {
         setMessage(message);
@@ -118,7 +117,7 @@ const UserList = ({ title, userRole }) => {
     }, [userRole, fetchUsers]);
 
     return (
-        <Container fluid className="mb-5">
+        <>
             <Row className="mb-3">
                 <Col>
                     <h4 className="text-start mb-3">{title}</h4>
@@ -198,7 +197,7 @@ const UserList = ({ title, userRole }) => {
                 handleConfirm={() => handleConfirmDelete(selectedUser.id)}
                 user={selectedUser}
             />
-        </Container>
+        </>
     );
 };
 

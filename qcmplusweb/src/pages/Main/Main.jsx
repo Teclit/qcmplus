@@ -7,11 +7,12 @@ import "./Main.css";
 import {AiFillWarning} from "react-icons/ai";
 import {ROLE} from "../../utils/UtilLists";
 import {isAdminUser} from "../../services/AuthService";
+import QuizList from "../../components/Quiz/QuizList";
 
 const Main = () => {
     const isAdmin = isAdminUser();
     const [showUserList, setShowUserList] = useState(true);
-    const [selectedItem, setSelectedItem] = useState('Trainee');
+    const [selectedItem, setSelectedItem] = useState();
 
     const handleSidebarItemClick = (item) => {
         setSelectedItem(item);
@@ -29,20 +30,22 @@ const Main = () => {
                 return <UserList title="Registered Trainee" userRole={ROLE.USER}/>;
             case 'Admin':
                 return <UserList title="Registered Admin" userRole={ROLE.ADMIN}/>;
-            case 'Exam':
-                return <h1><AiFillWarning/>Exam</h1>;
+            case 'Exams':
+                return <h1><AiFillWarning/>Exams</h1>;
             case 'Quizzes':
                 return <h1><AiFillWarning/>Quizzes</h1>;
             case 'Questions':
                 return <h1><AiFillWarning/>Questions</h1>;
             case 'Answers':
-                return <h1><AiFillWarning/>Dashboard</h1>;
+                return <h1><AiFillWarning/>Answers</h1>;
             case 'Features':
                 return <h1><AiFillWarning/>Features</h1>;
-            case 'Logout':
-                return <h1><AiFillWarning/>Logout</h1>;
+            case 'TakeExams':
+                return  <QuizList/>;
+            case 'Result':
+                return <h1><AiFillWarning/>Result</h1>;
             default:
-                return <h1><AiFillWarning/>Dashboard</h1>;
+                return <h1><AiFillWarning/>UserProfile</h1>;
         }
     };
 
@@ -64,7 +67,10 @@ const Main = () => {
                             {renderContent()}
                         </div>
                     ) : (
-                        <p> roe is user</p>
+                        <div className={"p-5"}>
+                            <h3 className={"text-bold text-center p-4"}>Evaluate Your Skills : Take the Quiz</h3>
+                            {renderContent()}
+                        </div>
                     )
                     }
                 </Col>

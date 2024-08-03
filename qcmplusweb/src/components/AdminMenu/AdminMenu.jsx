@@ -6,13 +6,16 @@ import {
     FaFileAlt,
     FaHome,
     FaQuestionCircle,
-    FaRegStar,
+    FaRegStar, FaUser,
     FaUserGraduate
 } from 'react-icons/fa';
+import {getLoggedInUser} from "../../services/AuthService";
 
 const AdminMenu =({renderAdminItem}) =>{
+    const getUser = getLoggedInUser();
     return (
         <>
+            {renderAdminItem('UserProfile', FaUser, getUser)}
             {renderAdminItem('Dashboard', FaHome, 'Dashboard')}
             {renderAdminItem('Admin', FaChalkboardTeacher, 'Admin')}
             {renderAdminItem('Trainee', FaUserGraduate, 'Trainee')}

@@ -5,10 +5,10 @@ import AddUser from "../../components/AddUser/AddUser";
 import UserList from "../../components/UserList/UserList";
 import "./Main.css";
 import {AiFillWarning} from "react-icons/ai";
-import {IoMdLogOut} from "react-icons/io"; // Import logout icon
-import {FaUser} from "react-icons/fa"; // Import user icon
+import {IoMdLogOut} from "react-icons/io";
+import {FaUser} from "react-icons/fa";
 import {ROLE} from "../../utils/UtilLists";
-import {getLoggedInUser, isAdminUser, isUserLoggedIn, logout} from "../../services/AuthService"; // Import logout function
+import {getLoggedInUser, isAdminUser, isUserLoggedIn, logout} from "../../services/AuthService";
 import QuizList from "../../components/Quiz/QuizList";
 import {useNavigate} from "react-router-dom";
 import ExamSelected from "../../components/ExamSelected/ExamSelected";
@@ -66,8 +66,7 @@ const Main = () => {
             case 'Features':
                 return <h1><AiFillWarning />Features: en cours de construction</h1>;
             case 'TakeExams':
-
-                // return <h1><AiFillWarning />Take Exams: en cours de construction</h1>;
+                //TODO Handle quizId
                return <ExamSelected quizId={quizId}/>;
             case 'HistoryExams':
                 return <h1><AiFillWarning />History Exams : en cours de construction</h1>;
@@ -78,10 +77,9 @@ const Main = () => {
             default:
                 if (isAdmin) {
                     handleSidebarItemClick('AdminDashboard');
-                    //return <h1><AiFillWarning />Admin Dashboard: en cours de construction</h1>;
                 } else {
                     handleSidebarItemClick('UserDashboard');
-                   // return <QuizList onTakeQuiz={handleTakeQuiz} />;
+
                 }
         }
     };

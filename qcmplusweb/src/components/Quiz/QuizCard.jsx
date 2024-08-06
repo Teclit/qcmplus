@@ -1,12 +1,7 @@
 import React from 'react';
-import {Button, Card} from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
-const QuizCard = ({ title, description, quizId }) => {
-    const handleTakeQuiz = () => {
-        //navigate(`/exam/${quizId}`);
-        console.log(`/exam/${quizId}`);
-    };
-
+const QuizCard = ({ title, description, quizId, onTakeQuiz }) => {
     const Img = ({ title = 'QCMPlus', link = `Images/${title}.jpg` }) => {
         return <div className="img-container"><img src={link} alt={title} className="img-fluid" /></div>;
     };
@@ -17,7 +12,7 @@ const QuizCard = ({ title, description, quizId }) => {
             <Card.Body>
                 <Card.Title className="text-bold">{title}</Card.Title>
                 <Card.Text>{description}</Card.Text>
-                <Button className="defaultBtn text-center" onClick={handleTakeQuiz}>Take Quiz</Button>
+                <Button className="defaultBtn text-center" onClick={() => onTakeQuiz(quizId)}>Take Quiz</Button>
             </Card.Body>
         </Card>
     );

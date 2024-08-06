@@ -15,8 +15,8 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public String handleGlobalException(BadCredentialsException ex) {
-        // Log detailed error message
         logger.error("Authentication failed: {}", ex.getMessage());
         return "Les identifications sont erronées";
     }
 }
+

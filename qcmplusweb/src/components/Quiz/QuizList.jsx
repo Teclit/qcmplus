@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './QuizList.css';
 import QuizCard from './QuizCard';
-import { retrieveQuizzes } from '../../services/QuizService';
-import { Carousel, Container } from 'react-bootstrap';
+import {retrieveQuizzes} from '../../services/QuizService';
+import {Carousel} from 'react-bootstrap';
 
-const QuizList = () => {
+const QuizList = ({ onTakeQuiz }) => {
     const [quizzes, setQuizzes] = useState([]);
+
     useEffect(() => {
         const fetchQuizzes = async () => {
             try {
@@ -15,6 +16,7 @@ const QuizList = () => {
                 console.error('Error fetching quizzes:', error);
             }
         };
+
         fetchQuizzes();
     }, []);
 
@@ -29,7 +31,8 @@ const QuizList = () => {
     const chunkedQuizzes = chunkArray(quizzes, 4);
 
     return (
-        <Container>
+        <>
+            <h3 className="text-bold text-center p-4">Evaluate Your Skills: Take the Quiz</h3>
             <Carousel className="quiz-list" indicators={false}>
                 {chunkedQuizzes.map((quizChunk, index) => (
                     <Carousel.Item key={index}>
@@ -40,13 +43,14 @@ const QuizList = () => {
                                     title={quiz.title}
                                     description={quiz.description}
                                     quizId={quiz.quizId}
+                                    onTakeQuiz={onTakeQuiz}
                                 />
                             ))}
                         </div>
                     </Carousel.Item>
                 ))}
             </Carousel>
-        </Container>
+        </>
     );
 };
 

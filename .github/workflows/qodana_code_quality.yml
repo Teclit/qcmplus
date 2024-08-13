@@ -30,7 +30,6 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn -B package
-        working-directory: ./qcmplus  # Ensure Maven runs in the correct directory
 
   # Step 3: Build Frontend
   build-frontend:
@@ -62,7 +61,6 @@ jobs:
           distribution: 'adopt'
       - name: Run Backend Tests
         run: mvn test
-        working-directory: ./qcmplus  # Ensure Maven runs in the correct directory
 
   # Step 5: Test Frontend
   test-frontend:

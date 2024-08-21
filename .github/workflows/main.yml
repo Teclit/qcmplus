@@ -9,15 +9,15 @@ on:
 
 jobs:
   # Step 1: Checkout code
-  checkout:
+  checkout-qcmplus:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
   # Step 2: Qodana Scan
-  qodana:
-    needs: checkout
+  qodana-qcmplus:
+    needs: checkout-qcmplus
     runs-on: ubuntu-latest
     continue-on-error: true
     permissions:
@@ -41,8 +41,8 @@ jobs:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
 
   # Step 3: Build Backend (qcmplus)
-  build-backend:
-    needs: [checkout, qodana]
+  build-qcmplusapp:
+    needs: [ checkout-qcmplus, qodana-qcmplus ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -58,8 +58,8 @@ jobs:
         run: mvn -B package --file pom.xml
 
   # Step 4: Build Frontend (qcmplus-web)
-  build-frontend:
-    needs: build-backend
+  build-qcmplusweb:
+    needs: build-qcmplusapp
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -75,9 +75,10 @@ jobs:
 
       - name: Build
         run: npm run build --prefix qcmplusweb
+
   # Step 5: Test Backend (qcmplus)
-  test-backend:
-    needs: build-backend
+  test-qcmplusapp:
+    needs: build-qcmplusapp
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -91,8 +92,8 @@ jobs:
         run: mvn test --file pom.xml
 
   # Step 6: Test Frontend (qcmplus-web)
-  test-frontend:
-    needs: build-frontend
+  test-qcmplusweb:
+    needs: build-qcmplusweb
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -107,9 +108,9 @@ jobs:
         run: npm test --prefix qcmplusweb
 
   # Step 7: Build Docker Image and Push to Docker Hub
-  deploy:
+  deploy-qcmplus:
     if: github.ref == 'refs/heads/master'
-    needs: [test-backend, test-frontend]
+    needs: [ test-qcmplusapp, test-qcmplusweb ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

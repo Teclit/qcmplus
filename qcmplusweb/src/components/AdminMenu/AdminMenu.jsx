@@ -6,7 +6,6 @@ import {
     FaFileAlt,
     FaHome,
     FaQuestionCircle,
-    FaRegStar,
     FaUserGraduate
 } from 'react-icons/fa';
 
@@ -20,7 +19,6 @@ const AdminMenu =({renderAdminItem}) =>{
             {renderAdminItem('Quizzes', FaFileAlt, 'Quizzes')}
             {renderAdminItem('Questions', FaQuestionCircle, 'Questions')}
             {renderAdminItem('Answers', FaCommentAlt, 'Answers')}
-            {renderAdminItem('Features', FaRegStar, 'Features')}
         </>
     );
 };

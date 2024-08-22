@@ -66,8 +66,6 @@ const Main = () => {
                 return <h1><AiFillWarning />Questions: en cours de construction</h1>;
             case 'Answers':
                 return <h1><AiFillWarning />Answers: en cours de construction</h1>;
-            case 'Features':
-                return <h1><AiFillWarning />Features: en cours de construction</h1>;
             case 'TakeExams':
                 return <ExamSelected quizId={quizId || 1} onStartExam={handleStartExam} />; // Pass handleStartExam
             case 'HistoryExams':
@@ -96,7 +94,6 @@ const Main = () => {
                         <div className="header d-flex justify-content-end">
                             {isAdmin && (
                                 <>
-                                    <Button className="ExportUserBtn me-2">Export CSV</Button>
                                     <Button className="ToggleUserBtn" onClick={() => setShowUserList(!showUserList)}>
                                         {showUserList ? 'Add User' : 'List Users'}
                                     </Button>
